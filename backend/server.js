@@ -31,7 +31,23 @@ if (!useMock) {
 }
 const app = express()
 
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173', credentials: true }))
+const allowedOrigins = [
+    process.env.CLIENT_URL || 'http://localhost:5173',
+    'http://localhost:5173',
+    'http://localhost:3000',
+]
+
+app.use(cors({
+    origin: (origin, callback) => {
+        // Allow requests with no origin (Render health checks, mobile apps)
+        if (!origin) return callback(null, true)
+        if (allowedOrigins.some(o => origin.startsWith(o)) || origin.endsWith('.netlify.app')) {
+            return callback(null, true)
+        }
+        return callback(new Error('Not allowed by CORS'))
+    },
+    credentials: true
+}))
 app.use(cookieParser())
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))

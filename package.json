@@ -1,6 +1,6 @@
 {
   "name": "traveller",
-  "description": "e-travel website",
+  "description": "Premium travel booking demo site",
   "version": "1.0.0",
   "main": "server.js",
   "type": "module",
@@ -9,14 +9,15 @@
     "server": "nodemon backend/server",
     "client": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "npm install --prefix frontend && npm run build --prefix frontend",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arundhati-bala/nomad.git"
+    "url": "git+https://github.com/Chirag240105/Traveller.git"
   },
-  "author": "ams",
+  "author": "Chirag Pandey",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.6.2",
@@ -36,13 +37,8 @@
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0"
   },
-  "bugs": {
-    "url": "https://github.com/arundhati-bala/nomad/issues"
-  },
-  "homepage": "https://github.com/arundhati-bala/nomad#readme",
   "devDependencies": {
     "concurrently": "^6.5.1",
-    "gh-pages": "^3.2.3",
     "nodemon": "^2.0.15"
   }
 }
