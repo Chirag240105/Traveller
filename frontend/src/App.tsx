@@ -11,9 +11,11 @@ import Register from './pages/Register'
 import Profile from './pages/Profile'
 import ProtectedRoute from './components/ProtectedRoute'
 import { setUser } from './hooks/useAuth'
+import { useTheme } from './context/ThemeContext'
 
 function App() {
   const location = useLocation()
+  const { theme } = useTheme()
 
   useEffect(() => {
     const params = new URLSearchParams(location.search)
@@ -30,7 +32,7 @@ function App() {
   }, [location.pathname, location.search])
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+    <div className={`${theme} flex min-h-screen flex-col transition-colors duration-300 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100`}>
       <Navbar />
       <AnimatePresence mode="wait">
         <motion.main

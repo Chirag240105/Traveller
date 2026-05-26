@@ -1,5 +1,6 @@
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -15,6 +16,10 @@ export default {
           800: '#33368d',
           900: '#2a2c77'
         }
+      },
+      fontFamily: {
+        display: ['Outfit', 'system-ui', 'sans-serif'],
+        editorial: ['Playfair Display', 'Georgia', 'serif'],
       }
     }
   },

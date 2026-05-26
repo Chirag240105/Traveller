@@ -11,29 +11,35 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(() => {
-    const savedTheme = localStorage.getItem('travellerTheme') as Theme
-    if (savedTheme === 'light' || savedTheme === 'dark') {
-      return savedTheme
-    }
-    // Default to dark since Traveller has a premium dark layout
+    const saved = localStorage.getItem('travellerTheme') as Theme
+    if (saved === 'light' || saved === 'dark') return saved
+    // Respect OS preference on first visit
+    if (window.matchMedia('(prefers-color-scheme: light)').matches) return 'light'
     return 'dark'
   })
 
   useEffect(() => {
-    const root = window.document.documentElement
+    const html = document.documentElement
+    const body = document.body
+
     if (theme === 'dark') {
-      root.classList.add('dark')
-      root.style.colorScheme = 'dark'
+      html.classList.add('dark')
+      html.classList.remove('light')
+      body.classList.add('dark')
+      body.classList.remove('light')
+      html.style.colorScheme = 'dark'
     } else {
-      root.classList.remove('dark')
-      root.style.colorScheme = 'light'
+      html.classList.remove('dark')
+      html.classList.add('light')
+      body.classList.remove('dark')
+      body.classList.add('light')
+      html.style.colorScheme = 'light'
     }
+
     localStorage.setItem('travellerTheme', theme)
   }, [theme])
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
-  }
+  const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark')
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -43,9 +49,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 }
 
 export const useTheme = () => {
-  const context = useContext(ThemeContext)
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider')
-  }
-  return context
+  const ctx = useContext(ThemeContext)
+  if (!ctx) throw new Error('useTheme must be used within ThemeProvider')
+  return ctx
 }
