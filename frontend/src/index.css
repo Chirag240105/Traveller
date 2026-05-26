@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color-scheme: dark;
+}
+
+/* Light theme overrides */
+.light {
+  color-scheme: light;
+  --bg-primary: radial-gradient(circle at top, rgba(99, 102, 241, 0.05), transparent 45%),
+    linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --border-glass: rgba(148, 163, 184, 0.2);
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-input: #ffffff;
+}
+
+/* Dark theme variables */
+.dark {
+  color-scheme: dark;
+  --bg-primary: radial-gradient(circle at top, rgba(99, 102, 241, 0.12), transparent 35%),
+    linear-gradient(180deg, #020617 0%, #030712 100%);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-glass: rgba(30, 41, 59, 0.6);
+  --bg-glass: rgba(3, 7, 18, 0.6);
+  --bg-card: rgba(3, 7, 18, 0.75);
+  --bg-input: rgba(15, 23, 42, 0.6);
+}
+
+html {
+  scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg-primary, radial-gradient(circle at top, rgba(99, 102, 241, 0.12), transparent 35%),
+    linear-gradient(180deg, #020617 0%, #030712 100%));
+  color: var(--text-main, #f8fafc);
+}
+
+/* Smooth transitions for theme changing */
+* {
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease-out;
+}
+
+/* Custom premium fonts classes */
+.font-display {
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-editorial {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Custom Glassmorphism styles */
+.glass {
+  background: var(--bg-glass, rgba(3, 7, 18, 0.6));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass, rgba(30, 41, 59, 0.6));
+}
+
+.glass-card {
+  background: var(--bg-card, rgba(3, 7, 18, 0.75));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass, rgba(30, 41, 59, 0.5));
+}
+
+.glass-nav {
+  background: rgba(3, 7, 18, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.light .glass-nav {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+/* Premium gradient animations */
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient {
+  background-size: 200% 200%;
+  animation: gradient-flow 6s ease infinite;
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: rgba(106, 117, 255, 0.2);
+  border-radius: 999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(106, 117, 255, 0.15);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6a75ff;
+}
+
+/* Float Animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.float-element {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Hide OS default scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
