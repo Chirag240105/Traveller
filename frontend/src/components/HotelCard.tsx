@@ -4,9 +4,20 @@ import { FaHeart, FaStar } from 'react-icons/fa6'
 import { useWishlist } from '../context/WishlistContext'
 import type { Hotel } from '../types'
 
+// Reliable fallback images by location
+const FALLBACKS: Record<string, string> = {
+  Amsterdam: 'https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?w=800&q=80',
+  'Buenos Aires': 'https://images.unsplash.com/photo-1589909202802-8f4aadce1849?w=800&q=80',
+  'New York City': 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800&q=80',
+  Tokyo: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80',
+  default: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80'
+}
+
+const getFallback = (location: string) =>
+  FALLBACKS[location] || FALLBACKS.default
+
 const HotelCard = ({ hotel }: { hotel: Hotel }) => {
   const { toggleWishlist, isInWishlist } = useWishlist()
-  
   const isSaved = isInWishlist(hotel._id)
 
   const handleWishlistToggle = (e: React.MouseEvent) => {
@@ -23,19 +34,23 @@ const HotelCard = ({ hotel }: { hotel: Hotel }) => {
     >
       <Link to={`/hotels/${hotel._id}`} className="block">
         {/* Exterior Image & Tags */}
-        <div className="relative h-64 overflow-hidden bg-slate-900 dark:bg-slate-900">
+        <div className="relative h-64 overflow-hidden bg-slate-800">
           <img
             src={hotel.image_exterior}
             alt={hotel.name}
             loading="lazy"
+            onError={(e) => {
+              const img = e.currentTarget
+              if (img.src !== getFallback(hotel.location)) {
+                img.src = getFallback(hotel.location)
+              }
+            }}
             className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
           />
           <div className="absolute inset-x-4 top-4 flex justify-between items-center z-10">
-            <span className="rounded-full bg-brand-500/90 dark:bg-brand-500/85 px-4.5 py-1.5 text-[10px] uppercase font-bold tracking-wider text-white shadow-md">
+            <span className="rounded-full bg-brand-500/90 px-3 py-1.5 text-[10px] uppercase font-bold tracking-wider text-white shadow-md">
               {hotel.tag || 'Exclusive stay'}
             </span>
-            
-            {/* Wishlist Heart Toggle */}
             <button
               onClick={handleWishlistToggle}
               className="rounded-full bg-slate-950/60 p-2.5 text-white backdrop-blur-md transition hover:bg-slate-950/80 hover:scale-110 active:scale-90"
@@ -46,7 +61,7 @@ const HotelCard = ({ hotel }: { hotel: Hotel }) => {
           </div>
         </div>
 
-        {/* Card Metadata Details */}
+        {/* Card Metadata */}
         <div className="space-y-4 p-6">
           <div className="flex items-start justify-between gap-3">
             <div className="space-y-1">
@@ -61,9 +76,7 @@ const HotelCard = ({ hotel }: { hotel: Hotel }) => {
               <p className="text-base font-extrabold text-brand-600 dark:text-brand-300 font-display">
                 ₹{hotel.price.toLocaleString()}
               </p>
-              <p className="text-[9px] uppercase tracking-widest text-slate-400 font-bold">
-                / night
-              </p>
+              <p className="text-[9px] uppercase tracking-widest text-slate-400 font-bold">/ night</p>
             </div>
           </div>
 
@@ -71,7 +84,6 @@ const HotelCard = ({ hotel }: { hotel: Hotel }) => {
             {hotel.description}
           </p>
 
-          {/* Footer ratings and stock details */}
           <div className="flex items-center justify-between border-t border-slate-100 dark:border-slate-800/80 pt-3 text-xs text-slate-500 dark:text-slate-400">
             <div className="flex items-center gap-1">
               <FaStar className="text-amber-400" size={13} />
