@@ -209,7 +209,7 @@ const hotels = [
     name: "nHow",
     location: "Amsterdam",
     price: 34663,
-    image_exterior: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=1000&h=666&fit=crop&q=80",,
+    image_exterior: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=1000&h=666&fit=crop&q=80",
     image_bar: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1000&h=666&fit=crop&q=80",
     image_room: "https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?w=1000&h=666&fit=crop&q=80",
     description: "The nhow Amsterdam RAI is located in the thriving business district of Zuidas in Amsterdam. Designed by leading architect Reinier de Graaf, the hotel will be located next to the RAI Convention Center, with easy subway access to Amsterdam’s main attractions. The 24 floor hotel has 650 rooms, all with floor-to-ceiling windows and views across the city. The hotel’s 650 newly built rooms, inspired by the six cardinal faces of the hotel, are modern and light, with floor-to-ceiling windows. The pet-friendly rooms feature (N)espresso coffee machines, flat-screen TVs, digital safes, a minibar, and complimentary Wi-Fi. The junior suite have jacuzzi and the presidential suite on the 21st floor features a terrace. A buffet breakfast offering both continental and American options is served daily, with a bar on the first floor for relaxation. Guests can enjoy gourmet food in the 17th floor restaurant, complete with three terraces.",
