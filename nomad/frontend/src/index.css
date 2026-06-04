@@ -1,0 +1,141 @@
+/* ─── Google Fonts ─────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ─── Light Mode ────────────────────────────────────────── */
+html.light body {
+  background: linear-gradient(180deg, #FBFBFA 0%, #F7F5F0 100%);
+  color: #030712;
+  color-scheme: light;
+}
+
+html.light .glass-nav {
+  background: rgba(251, 251, 250, 0.8);
+  border-bottom: 1px solid rgba(3, 7, 18, 0.08);
+}
+
+html.light .glass {
+  background: rgba(251, 251, 250, 0.7);
+  border: 1px solid rgba(3, 7, 18, 0.08);
+}
+
+html.light .glass-card {
+  background: rgba(251, 251, 250, 0.9);
+  border: 1px solid rgba(3, 7, 18, 0.06);
+}
+
+/* ─── Dark Mode ─────────────────────────────────────────── */
+html.dark body {
+  background: radial-gradient(circle at top, rgba(8, 30, 71, 0.4), transparent 45%),
+    linear-gradient(180deg, #030712 0%, #051129 100%);
+  color: #FBFBFA;
+  color-scheme: dark;
+}
+
+html.dark .glass-nav {
+  background: rgba(3, 7, 18, 0.65);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+html.dark .glass {
+  background: rgba(3, 7, 18, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+html.dark .glass-card {
+  background: rgba(5, 17, 41, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* ─── Base ──────────────────────────────────────────────── */
+html {
+  /* We will let Lenis handle smooth scroll momentum. */
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Smooth theme transitions */
+*, *::before, *::after {
+  transition: border-color 0.15s ease, background-color 0.2s ease, color 0.15s ease;
+}
+
+/* Disable transitions on images to avoid flicker */
+img, video, svg {
+  transition: none !important;
+}
+
+/* ─── Glassmorphism ─────────────────────────────────────── */
+.glass {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.glass-card {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-nav {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ─── Typography ────────────────────────────────────────── */
+.font-display {
+  font-family: 'Outfit', system-ui, sans-serif;
+}
+
+.font-editorial {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* ─── Animations ────────────────────────────────────────── */
+@keyframes gradient-flow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-gradient {
+  background-size: 200% 200%;
+  animation: gradient-flow 6s ease infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+.float-element {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: rgba(106, 117, 255, 0.25); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #6a75ff; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
